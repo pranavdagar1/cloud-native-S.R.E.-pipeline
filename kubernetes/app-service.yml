@@ -1,0 +1,15 @@
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: monitoring-app-service
+    namespace: monitoring-app
+    labels:
+      app: monitoring-app       # add a label so ServiceMonitor can match
+  spec:
+    selector:
+      app: monitoring-app
+    ports:
+      - name: http              # add a name for ServiceMonitor to reference
+        port: 3000              # service port Prometheus uses
+        targetPort: 3100        # actual container port
+    type: ClusterIP
